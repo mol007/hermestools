@@ -37,9 +37,10 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\scripts\build.ps1
 ```
 
-4) EXE output:
+4) EXE outputs:
 
-`dist\JKSiteAudit.exe`
+- `dist\JKSiteAudit.exe` (main scanner)
+- `dist\JKSiteAuditRunner.exe` (wrapper exe)
 
 ## Run on target PC
 
@@ -47,6 +48,12 @@ Run as Administrator (recommended for full visibility):
 
 ```powershell
 .\JKSiteAudit.exe
+```
+
+Or run the wrapper executable (same folder):
+
+```powershell
+.\JKSiteAuditRunner.exe
 ```
 
 Optional domain validation:

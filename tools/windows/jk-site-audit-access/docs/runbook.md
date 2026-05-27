@@ -6,6 +6,8 @@
 - cd tools/windows/jk-site-audit-access
 - If blocked by execution policy:
   - powershell -ExecutionPolicy Bypass -File .\scripts\build.ps1
+- Or use normal command wrapper (no PowerShell script policy issue):
+  - .\scripts\build.cmd
 - Or:
   - Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
   - .\scripts\build.ps1

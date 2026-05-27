@@ -9,13 +9,20 @@ if (!(Test-Path $dist)) { New-Item -ItemType Directory -Path $dist | Out-Null }
 Push-Location $src
 try {
     dotnet restore
+
     dotnet publish .\JKSiteAudit.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
+    $auditExe = Join-Path $src "bin\Release\net8.0\win-x64\publish\JKSiteAudit.exe"
+    if (!(Test-Path $auditExe)) { throw "Build succeeded but EXE not found: $auditExe" }
+    Copy-Item $auditExe (Join-Path $dist "JKSiteAudit.exe") -Force
 
-    $published = Join-Path $src "bin\Release\net8.0\win-x64\publish\JKSiteAudit.exe"
-    if (!(Test-Path $published)) { throw "Build succeeded but EXE not found: $published" }
+    dotnet publish .\JKSiteAuditRunner.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
+    $runnerExe = Join-Path $src "bin\Release\net8.0\win-x64\publish\JKSiteAuditRunner.exe"
+    if (!(Test-Path $runnerExe)) { throw "Build succeeded but EXE not found: $runnerExe" }
+    Copy-Item $runnerExe (Join-Path $dist "JKSiteAuditRunner.exe") -Force
 
-    Copy-Item $published (Join-Path $dist "JKSiteAudit.exe") -Force
-    Write-Host "Build complete: $dist\JKSiteAudit.exe"
+    Write-Host "Build complete:"
+    Write-Host "  $dist\JKSiteAudit.exe"
+    Write-Host "  $dist\JKSiteAuditRunner.exe"
 }
 finally {
     Pop-Location
