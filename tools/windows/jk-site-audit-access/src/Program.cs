@@ -295,6 +295,7 @@ class Program
 
     static IEnumerable<JsonObject> ReadJsonArray(string json)
     {
+        var list = new List<JsonObject>();
         try
         {
             var node = JsonNode.Parse(json);
@@ -302,18 +303,20 @@ class Program
             {
                 foreach (var item in arr)
                 {
-                    if (item is JsonObject o) yield return o;
+                    if (item is JsonObject o) list.Add(o);
                 }
             }
             else if (node is JsonObject obj)
             {
-                yield return obj;
+                list.Add(obj);
             }
         }
         catch
         {
-            yield break;
+            // ignore parse failures; caller handles empty list
         }
+
+        return list;
     }
 
     static int RiskOrder(string risk) => risk.ToUpperInvariant() switch

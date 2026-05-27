@@ -11,4 +11,8 @@
     <RootNamespace>JKSiteAuditRunner</RootNamespace>
     <StartupObject>RunnerProgram</StartupObject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Program.cs" />
+  </ItemGroup>
 </Project>

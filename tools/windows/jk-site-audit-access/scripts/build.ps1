@@ -8,7 +8,8 @@ if (!(Test-Path $dist)) { New-Item -ItemType Directory -Path $dist | Out-Null }
 
 Push-Location $src
 try {
-    dotnet restore
+    dotnet restore .\JKSiteAudit.csproj
+    dotnet restore .\JKSiteAuditRunner.csproj
 
     dotnet publish .\JKSiteAudit.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true
     $auditExe = Join-Path $src "bin\Release\net8.0\win-x64\publish\JKSiteAudit.exe"

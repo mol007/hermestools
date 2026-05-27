@@ -9,5 +9,10 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <AssemblyName>JKSiteAudit</AssemblyName>
     <RootNamespace>JKSiteAudit</RootNamespace>
+    <StartupObject>Program</StartupObject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="RunnerProgram.cs" />
+  </ItemGroup>
 </Project>

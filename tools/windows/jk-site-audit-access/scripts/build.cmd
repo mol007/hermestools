@@ -11,7 +11,9 @@ cd /d "%SRC%"
 if errorlevel 1 goto :err
 
 echo [1/3] Restoring...
-dotnet restore
+dotnet restore .\JKSiteAudit.csproj
+if errorlevel 1 goto :err
+dotnet restore .\JKSiteAuditRunner.csproj
 if errorlevel 1 goto :err
 
 echo [2/3] Building JKSiteAudit.exe...
