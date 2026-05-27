@@ -8,7 +8,8 @@ What it does:
   - SMB share exposure
   - DNS configuration and DNS resolution
   - firewall profile state
-  - basic host/network identity
+  - network profile and domain info
+- Generates a basic Blue Team risk summary (CRITICAL/HIGH/MEDIUM/LOW/INFO).
 - Exports results to JSON and TXT under `%PROGRAMDATA%\JKCyber\SiteAudit\`.
 - Does NOT change system settings.
 - Does NOT open backdoors, add users, or disable security.
@@ -23,10 +24,17 @@ Folder layout:
 
 1) Install .NET SDK 8.0+ on a Windows build machine.
 2) Open PowerShell in this folder.
-3) Run:
+3) If script execution policy blocks unsigned scripts, run either:
 
 ```powershell
-./scripts/build.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\build.ps1
+```
+
+or:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\scripts\build.ps1
 ```
 
 4) EXE output:
@@ -39,6 +47,12 @@ Run as Administrator (recommended for full visibility):
 
 ```powershell
 .\JKSiteAudit.exe
+```
+
+Optional domain validation:
+
+```powershell
+.\JKSiteAudit.exe --domain yourdomain.local
 ```
 
 Output files:
